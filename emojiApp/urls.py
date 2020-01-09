@@ -18,7 +18,7 @@ from django.urls import path, include
 from . import views
 
 urlpatterns = [
-    path('', views.index),
+    path('', views.index, name="top"),
     path('admin/', admin.site.urls),
     path('emojiTransApp/', include('emojiTransApp.urls')),
     path('emoji/<foo>', views.emoji),
