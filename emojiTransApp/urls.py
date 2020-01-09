@@ -1,8 +1,10 @@
 from django.urls import path
 from . import views
 
+app_name = 'emojiTransApp'
+
 urlpatterns = [
-    path('', views.index),
+    path('', views.index, name='top'),
     path('emoji', views.emoji),
     path('search', views.search),
     path('result', views.result)
