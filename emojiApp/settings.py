@@ -7,5 +7,4 @@ except ImportError:
 
 if not DEBUG:
     import django_heroku
-    print(locals())
     django_heroku.settings(locals())
