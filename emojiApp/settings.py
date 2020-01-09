@@ -6,6 +6,7 @@ except ImportError:
     pass
 
 if not DEBUG:
+    SECRET_KEY = os.environ['SECRET_KEY']
     import django_heroku
     import os
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
