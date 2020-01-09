@@ -7,7 +7,6 @@ except ImportError:
 
 if not DEBUG:
     import django_heroku
-    import os
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
     # Static files (CSS, JavaScript, Images)
