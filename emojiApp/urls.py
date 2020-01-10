@@ -21,6 +21,7 @@ urlpatterns = [
     path('', views.index, name="top"),
     path('admin/', admin.site.urls),
     path('emojiTransApp/', include('emojiTransApp.urls')),
+    path('visual/', views.visualize, name="visual"),
     path('emoji/<foo>', views.emoji),
     path('form', views.render_form),
     path('login', views.login)

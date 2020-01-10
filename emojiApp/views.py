@@ -7,6 +7,9 @@ def index(request):
 def emoji(request, foo):
     return render(request, 'index.html', {'title': foo})
 
+def visualize(request):
+    return render(request, 'visualize.html')
+
 def render_form(request):
     return render(request, 'login.html')
 
