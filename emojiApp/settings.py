@@ -96,7 +96,7 @@ LOGGING = {
     "handlers": {
         "file": {
             "class": "logging.handlers.RotatingFileHandler",
-            "filename": PROJECT_ROOT + "/logs/django.log",
+            "filename": BASE_DIR + "/logs/django.log",
             "formatter": "verbose",
             "maxBytes": 1024 * 1024 * 1,
             "backupCount": 5,
