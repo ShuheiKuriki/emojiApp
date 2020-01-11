@@ -111,7 +111,7 @@ STATICFILES_DIRS = [
 ]
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 try:
     from .local_settings import *
@@ -126,6 +126,5 @@ if not DEBUG:
 
     # Static files (CSS, JavaScript, Images)
     # https://docs.djangoproject.com/en/1.9/howto/static-files/
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
     django_heroku.settings(locals(), staticfiles=False)
