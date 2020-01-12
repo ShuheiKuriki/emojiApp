@@ -9,7 +9,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
 
@@ -154,13 +154,13 @@ try:
 except ImportError:
     pass
 
-if not DEBUG:
-    import os
-    SECRET_KEY = os.environ['SECRET_KEY']
+# if not DEBUG:
+import os
+SECRET_KEY = os.environ['SECRET_KEY']
 
-    import django_heroku
+import django_heroku
 
     # Static files (CSS, JavaScript, Images)
     # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
-    django_heroku.settings(locals(), staticfiles=False)
+django_heroku.settings(locals(), staticfiles=False)
