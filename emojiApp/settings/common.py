@@ -125,14 +125,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-#アプリの直下
+#テンプレートなどでwebサーバーが探しに行く場所
 STATIC_URL = '/static/'
+
+# staticファイルを集約する場所
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# debugがfalseになる場合のdjangoプロジェクト用の設定
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
-#プロジェクトの直下
+#プロジェクト全体に共通するstaticファイル
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static")
 ]
