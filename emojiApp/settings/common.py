@@ -127,6 +127,7 @@ USE_TZ = True
 
 #アプリの直下
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # debugがfalseになる場合のdjangoプロジェクト用の設定
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
