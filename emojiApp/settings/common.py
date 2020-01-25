@@ -1,16 +1,12 @@
 import os
+import logging
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-
-ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
 
 
 # Application definition
@@ -22,7 +18,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'emojiApp'
+    'emojiApp',
+    'bootstrap4'
 ]
 
 MIDDLEWARE = [
@@ -60,14 +57,6 @@ WSGI_APPLICATION = 'emojiApp.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-
-
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
@@ -86,6 +75,38 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# LOGGING = {
+#     "version": 1,
+#     "disable_existing_loggers": False,
+#     "handlers": {
+#         "file": {
+#             "class": "logging.handlers.RotatingFileHandler",
+#             "filename": BASE_DIR + "/logs/django.log",
+#             "formatter": "verbose",
+#             "maxBytes": 1024 * 1024 * 1,
+#             "backupCount": 5,
+#         },
+#     },
+#     "formatters": {
+#         "verbose": {
+#             "format": "\t".join(
+#                 [
+#                     "[%(levelname)s]",
+#                     "%(asctime)s",
+#                     "%(name)s.%(funcName)s:%(lineno)s",
+#                     "%(message)s",
+#                 ]
+#             )
+#         },
+#     },
+#     "loggers": {
+#         "file": {
+#             "handlers": ["file"],
+#             "level": os.getenv("DJANGO_LOG_LEVEL", "INFO"),
+#             "propagate": True,
+#         },
+#     },
+# }
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
@@ -104,32 +125,15 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
+#アプリの直下
 STATIC_URL = '/static/'
 
+# debugがfalseになる場合のdjangoプロジェクト用の設定
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+#プロジェクトの直下
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static")
 ]
-
-<<<<<<< HEAD
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-=======
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
->>>>>>> 3fd8ab6979beaad5f869a251a6b72ce97352a31a
-
-
-try:
-    from .local_settings import *
-except ImportError:
-    pass
-
-if not DEBUG:
-    import os
-    SECRET_KEY = os.environ['SECRET_KEY']
-
-    import django_heroku
-
-    # Static files (CSS, JavaScript, Images)
-    # https://docs.djangoproject.com/en/1.9/howto/static-files/
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
-    django_heroku.settings(locals(), staticfiles=False)
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'

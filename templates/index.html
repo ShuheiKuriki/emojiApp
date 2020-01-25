@@ -1,12 +1,5 @@
-<!doctype　html>
-<html>
-  <head>
-    <meta　charset="utf8"/>
-    <link rel="stylesheet" href="/static/style.css"/>
-  </head>
-  <body>
-    <h1>{{title}}</h1>
-    <a href="{% url 'emojiTransApp:form' %}">翻訳ページ</a><br>
-    <a href="{% url 'visual' %}">絵文字マップ</a><br>
-  </body>
-</html>
+{% extends "base.html" %}
+{% block title %}トップページ{% endblock %}
+{% block content %}
+    <h1>cross-lingualな世界へようこそ</h1>
+{% endblock %}

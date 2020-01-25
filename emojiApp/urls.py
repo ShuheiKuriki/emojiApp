@@ -17,10 +17,13 @@ from django.contrib import admin
 from django.urls import path, include
 from . import views
 
+app_name = 'cross-lingual'
+
 urlpatterns = [
     path('', views.index, name="top"),
     path('admin/', admin.site.urls),
     path('emojiTransApp/', include('emojiTransApp.urls')),
+    path('crosslingual/', include('crosslingual.urls')),
     path('visual/', views.visualize, name="visual"),
     path('emoji/<foo>', views.emoji),
     path('form', views.render_form),

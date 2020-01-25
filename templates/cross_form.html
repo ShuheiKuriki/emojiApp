@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}自然言語フォーム{% endblock %}
+{% block active1 %}active{% endblock %}
+{% block content %}
+    <form method="POST" action="result">
+        {% csrf_token %}
+        <input placeholder="English Word" name="en" type="text"/>
+        <!-- <input placeholder="自然言語文" name="sentence" type="text"/> -->
+        <button type="submit">単語翻訳</button>
+    </form>
+{% endblock %}

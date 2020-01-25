@@ -1,13 +1,25 @@
-<!doctype html>
-<html>
-    <head>
-        <meta charset="utf8"/>
-    </head>
-    <body>
-        <h1>入力された自然言語文</h1>
-        <p>{{sentence}}</p>
-        <h1>翻訳絵文字列</h1>
-        <p>&#x1F600;</p>
-        <a href="{% url 'top' %}">トップページへ戻る</a><br>
-    </body>
-</html>
+{% extends "base.html" %}
+{% block title %}絵文字翻訳結果ページ{% endblock %}
+{% block content %}
+  <h1>入力された自然言語文</h1>
+  <p>{{sentence}}</p>
+{% endblock %}
+{% block content2 %}
+  <h1>翻訳絵文字列（単語ごと）</h1>
+  <p>
+    {% for emoji in emojis %}
+      {{ emoji }}<br>
+    {% endfor %}
+  </p>
+{% endblock %}
+{% block content3 %}
+  <h1>翻訳絵文字列（１絵文字へ）</h1>
+  <p>
+    {% for emoji in emojis2 %}
+      {{ emoji }}<br>
+    {% endfor %}
+  </p>
+{% endblock %}
+{% block content4 %}
+  <a href="{% url 'emojiTransApp:form' %}">もう一度翻訳する</a><br>
+{% endblock %}

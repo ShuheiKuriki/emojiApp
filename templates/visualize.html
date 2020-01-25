@@ -1,12 +1,9 @@
-<!doctype　html>
-<html>
-  <head>
-    <meta　charset="utf8"/>
-    <link rel="stylesheet" href="/static/style.css"/>
-  </head>
-  <body>
-    <h1>絵文字埋め込み空間の可視化</h1>
+{% extends "base.html" %}
+{% block title %}絵文字空間可視化ページ{% endblock %}
+{% block content %}
+    <h1>emoji2vecによる絵文字埋め込み空間の可視化</h1>
+{% endblock %}
+{% block content2 %}
     {% load static %}
     <img src="{% static "emoji_vector_embedding.png" %}" width="1050" height="700">
-  </body>
-</html>
+{% endblock %}

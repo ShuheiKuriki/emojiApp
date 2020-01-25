@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}cross-lingualトップ{% endblock %}
+{% block active1 %}active{% endblock %}
+{% block content %}
+    <h1>自然言語ページ</h1>
+{% endblock %}
+{% block content2 %}
+    <a href="{% url 'crosslingual:form' %}">単語翻訳</a><br>
+    <a href="{% url 'crosslingual:visual' %}">可視化</a><br>
+{% endblock %}

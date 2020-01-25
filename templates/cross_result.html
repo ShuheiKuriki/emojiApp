@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}絵文字翻訳結果ページ{% endblock %}
+{% block content %}
+  <h1>入力された英単語</h1>
+  <p>{{en}}</p>
+{% endblock %}
+{% block content2 %}
+  <h1>近い意味のスペイン語</h1>
+  <p>
+    {% for result in tgt_words %}
+      {{ result }}<br>
+    {% endfor %}
+  </p>
+{% endblock %}
+{% block content3 %}
+  <a href="{% url 'crosslingual:form' %}">もう一度翻訳する</a><br>
+{% endblock %}
