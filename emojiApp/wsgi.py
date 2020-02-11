@@ -30,5 +30,5 @@ def awake():
             print("error")
         time.sleep(300)
 
-t = threading.Thread(target=awake)
-t.start()
+# t = threading.Thread(target=awake)
+# t.start()
