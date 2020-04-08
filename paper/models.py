@@ -16,7 +16,6 @@ class Paper(models.Model):
 
     read_or_not = models.BooleanField(default=False)
     read_date = models.DateField('読んだ日', default=now, blank=True, null=True)
-    order = models.IntegerField('順番', default=0)
 
     def __str__(self):
         return self.title

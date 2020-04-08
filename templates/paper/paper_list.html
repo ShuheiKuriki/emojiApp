@@ -3,7 +3,6 @@
 {% block active3 %}active{% endblock %}
 {% block content %}
 <a class='btn btn-warning float-left' href="{% url 'paper:create' %}">論文追加</a>
-</h3>
 <form class='mt-4' method="POST" action="{% url 'paper:sort' %}">
   {% csrf_token %}
   {% for field in form %}
@@ -93,7 +92,7 @@
               </tr>
               <tr>
                 <th scope='row'></th>
-                <td scope='col'></td>
+                <td scope='col'>メニュー</td>
                 <td scope='col'>
                   <div class="d-block d-md-none dropdown">
                     <button type="button" class="btn-xs btn-info dropdown-toggle" data-toggle="dropdown"><span class="caret"></span>menu</button>

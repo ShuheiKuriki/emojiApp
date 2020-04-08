@@ -22,7 +22,8 @@ INSTALLED_APPS = [
     'bootstrap4',
     'crosslingual.apps.CrosslingualConfig',
     'emojiTransApp.apps.EmojitransappConfig',
-    'paper.apps.PaperConfig'
+    'paper.apps.PaperConfig',
+    'memo.apps.MemoConfig'
 ]
 
 MIDDLEWARE = [

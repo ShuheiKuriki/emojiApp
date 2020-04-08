@@ -1,0 +1,24 @@
+{% extends 'base/base.html' %}
+{% block title %}{{ memo.date }}{% endblock %}
+{% block active4 %}active{% endblock %}
+{% block content %}{% endblock %}
+{% block content2 %}
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="card card-default">
+          <div class="card-body">
+            {{info.date}} : <br>{{ info.memo }}
+          </div>
+          <div class="card-footer">
+            <form method="post" action="{% url 'memo:delete' memo.id %}">{% csrf_token %}
+              <a class="btn btn-success" href="{% url 'memo:index' %}">メモ一覧</a>
+              <a class="btn btn-primary" href="{% url 'memo:update' memo.id %}">修正</a>
+              <button class="btn btn-danger" type="submit" onclick='return confirm("本当に削除しますか？");'>削除</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

@@ -25,7 +25,7 @@ urlpatterns = [
     path('emojiTransApp/', include('emojiTransApp.urls')),
     path('crosslingual/', include('crosslingual.urls')),
     path('paper/', include('paper.urls')),
-    path('emoji/<foo>', views.emoji),
+    path('memo/', include('memo.urls')),
 ]
 
 # if settings.DEBUG:    # この if 文 (5STEP) を追加します。

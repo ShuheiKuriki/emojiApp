@@ -56,7 +56,7 @@ class PaperUpdateView(UpdateView):
 def delete(request,pk):
     paper = get_object_or_404(Paper, pk=pk)
     paper.delete()
-    return redirect_to_origin(request)
+    return redirect('paper:index')
 
 class PaperDetailView(DetailView):
     model = Paper

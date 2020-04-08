@@ -28,23 +28,26 @@
                 <li class="nav-item {% block active3 %}{% endblock %}">
                     <a class="nav-link" href="{% url 'paper:index' %}">論文</a>
                 </li>
+                <li class="nav-item {% block active4 %}{% endblock %}">
+                    <a class="nav-link" href="{% url 'memo:index' %}">方針メモ</a>
+                </li>
             </ul>
         </div>
     </nav>
     <!-- <div class="jumbotron"> -->
-      <div class="container mt-3 mb-3">
+      <div class="container my-4">
         {% block content %}
         {% endblock %}
       </div>
-      <div class="container mt-3 mb-3">
+      <div class="container my-4">
         {% block content2 %}
         {% endblock %}
       </div>
-      <div class="container mt-3 mb-3">
+      <div class="container my-3">
         {% block content3 %}
         {% endblock %}
       </div>
-      <div class="container mt-3 mb-3">
+      <div class="container my-3">
         {% block content4 %}
         {% endblock %}
       </div>
