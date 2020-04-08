@@ -7,5 +7,5 @@ urlpatterns = [
     path('', views.index, name='top'),
     path('form', views.form, name='form'),
     path('result', views.result),
-    path('visual', views.visual, name='visual')
+    path('translate_list', views.translate_list, name='list')
 ]

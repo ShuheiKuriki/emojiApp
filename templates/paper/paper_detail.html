@@ -1,0 +1,25 @@
+{% extends 'base/base.html' %}
+{% block title %}{{ paper.title }}{% endblock %}
+{% block content %}{% endblock %}
+{% block content2 %}
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="card card-default">
+          {% for key,value in info.items %}
+          <div class="card-body">
+            ○{{key}} : <br>{% if value is not None %}{{ value|linebreaksbr }}{% endif %}
+          </div>
+          {% endfor %}
+          <div class="card-footer">
+            <a class="btn btn-success btn-block my-2" href="{% url 'paper:index' %}">論文一覧へ</a>
+            <a class="btn btn-primary btn-block my-2" href="{% url 'paper:update' paper.id %}?next={{ request.get_full_path }}">修正</a>
+            <form method="post" action="{% url 'paper:delete' paper.id %}">{% csrf_token %}
+              <button class="btn btn-danger btn-block" type="submit" onclick='return confirm("本当に削除しますか？");'>削除</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

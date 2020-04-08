@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base/base.html" %}
 {% block title %}cross-lingualトップ{% endblock %}
 {% block active1 %}active{% endblock %}
 {% block content %}
@@ -6,5 +6,5 @@
 {% endblock %}
 {% block content2 %}
     <a href="{% url 'crosslingual:form' %}">単語翻訳</a><br>
-    <a href="{% url 'crosslingual:visual' %}">可視化</a><br>
+    <a href="{% url 'crosslingual:list' %}">単語翻訳結果一覧</a><br>
 {% endblock %}

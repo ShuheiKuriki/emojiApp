@@ -19,7 +19,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'emojiApp',
-    'bootstrap4'
+    'bootstrap4',
+    'crosslingual.apps.CrosslingualConfig',
+    'emojiTransApp.apps.EmojitransappConfig',
+    'paper.apps.PaperConfig'
 ]
 
 MIDDLEWARE = [

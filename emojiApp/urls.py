@@ -24,8 +24,12 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('emojiTransApp/', include('emojiTransApp.urls')),
     path('crosslingual/', include('crosslingual.urls')),
-    path('visual/', views.visualize, name="visual"),
+    path('paper/', include('paper.urls')),
     path('emoji/<foo>', views.emoji),
-    path('form', views.render_form),
-    path('login', views.login)
 ]
+
+# if settings.DEBUG:    # この if 文 (5STEP) を追加します。
+import debug_toolbar
+urlpatterns += [
+    path('__debug__/', include(debug_toolbar.urls))
+    ]
