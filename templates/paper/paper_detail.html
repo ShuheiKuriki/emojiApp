@@ -5,12 +5,12 @@
 {% block content2 %}
   <div class="card card-default">
     <div class="card-body">
-        ○タイトル : {% if paper.title is not None %}{{ paper.title }}{% endif %}<br><br>
-        ○分野　 　: {% if paper.field is not None %}{{ paper.field }}{% endif %}<br>
-        ○著者　 　: {% if paper.author is not None %}{{ paper.author }}{% endif %}<br>
-        ○会議名 　: {% if paper.conference is not None %}{{ paper.conference }}{% endif %}<br>
-        ○年　　 　: {% if paper.year is not None %}{{ paper.year }}{% endif %}<br><br>
-        ○感想 : {% if paper.memo is not None %}{{ paper.memo|linebreaksbr }}{% endif %}<br><br>
+      {% if paper.title is not None %}<p class='card-text'>○タイトル :　{{ paper.title }}</p>{% endif %}
+      {% if paper.field is not None %}<p class='card-text'>○分野　 　:　{{ paper.field }}</p>{% endif %}
+      {% if paper.author is not None %}<p class='card-text'>○著者　 　:　{{ paper.author }}</p>{% endif %}
+      {% if paper.conference is not None %}<p class='card-text'>○会議名 　:　{{ paper.conference }}</p>{% endif %}
+      {% if paper.year is not None %}<p class='card-text'>○年　　 　:　{{ paper.year }}</p>{% endif %}
+      {% if paper.memo is not None %}<p class='card-title'>○感想</p><p class="card-text">{{ paper.memo|linebreaksbr }}</p>{% endif %}
     </div>
     <div class="card-footer">
        <form method="post" action="{% url 'paper:delete' paper.id %}">{% csrf_token %}

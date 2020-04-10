@@ -8,8 +8,8 @@
   {% for memo in memo_list %}
     <div class="card card-default">
       <div class="card-body">
-        {{ memo.date.month }}/{{ memo.date.day }}<br><br>
-        {{ memo.memo|linebreaksbr }}<br><br>
+        <h5 class='card-title'>{{ memo.date.month }}/{{ memo.date.day }}</h5>
+        <p class='card-text'>{{ memo.memo|linebreaksbr }}</p>
         <div class="card-footer">
           <form method="post" action="{% url 'memo:delete' memo.id %}">{% csrf_token %}
             <a class="btn btn-primary" href="{% url 'memo:update' memo.id %}?next={{ request.get_full_path }}">修正</a>
