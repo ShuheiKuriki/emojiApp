@@ -26,13 +26,13 @@ class MemoListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)  #テンプレートに渡すコンテキストに 「user_count」 という変数を追加
         memo_list = context['memo_list']
-        memo2 = []
-        n = len(memo_list)
-        for i in range(int(n/2)):
-            memo2.append([memo_list[2*i], memo_list[2*i+1]])
-        if n%2 == 1:
-            memo2.append([memo_list[n-1]])
-        context['memo2'] = memo2
+        col1, col2 = [], []
+        for i, memo in enumerate(memo_list):
+            if i%2==0:
+                col1.append(memo)
+            else:
+                col2.append(memo)
+        context['memo2'] = [col1,col2]
         return context
 
 class MemoCreateView(CreateView):

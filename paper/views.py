@@ -31,13 +31,14 @@ class PaperListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)  #テンプレートに渡すコンテキストに 「user_count」 という変数を追加
         context['form'] = SortForm
-        paper2 = []
-        n = len(context['paper_list'])
-        for i in range(int(n/2)):
-            paper2.append([context['paper_list'][2*i], context['paper_list'][2*i+1]])
-        if n%2 == 1:
-            paper2.append([context['paper_list'][n-1]])
-        context['paper2'] = paper2
+        paper_list = context['paper_list']
+        col1, col2 = [], []
+        for i, paper in enumerate(paper_list):
+            if i%2==0:
+                col1.append(paper)
+            else:
+                col2.append(paper)
+        context['paper2'] = [col1,col2]
         return context
 
 def sort(request):
