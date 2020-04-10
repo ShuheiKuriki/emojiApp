@@ -32,3 +32,50 @@
     </div>
   {% endfor %}
 {% endblock %}
+{% block content-left %}
+  {% for paper in paper_list %}
+    {% if forloop.counter|divisibleby:2 == 0 %}
+    <div class="card card-default">
+      <div class="card-body">
+        <h5 class='card-title'>○タイトル</h5>
+        <p class='card-text'>{{ paper.title|linebreaksbr }}</p>
+        {% if paper.memo is not None %}
+          <h5 class='card-title'>○感想</h5>
+          <p class='card-text'>{{ paper.memo|linebreaksbr }}</p>
+        {% endif %}
+        <div class="card-footer">
+          <form method="post" action="{% url 'paper:delete' paper.id %}">{% csrf_token %}
+            <a class="btn btn-sm btn-success" href="{% url 'paper:detail' paper.id %}">詳細</a>
+            <a class="btn btn-sm btn-primary" href="{% url 'paper:update' paper.id %}?next={{ request.get_full_path }}">修正</a>
+            <button class="btn btn-sm btn-danger" type="submit" onclick='return confirm("本当に削除しますか？");'>削除</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  {% endfor %}
+{% endblock %}
+{% block content-right %}
+  {% for paper in paper_list %}
+    {% if forloop.counter|divisibleby:2 == 1 %}
+    <div class="card card-default">
+      <div class="card-body">
+        <h5 class='card-title'>○タイトル</h5>
+        <p class='card-text'>{{ paper.title|linebreaksbr }}</p>
+        {% if paper.memo is not None %}
+          <h5 class='card-title'>○感想</h5>
+          <p class='card-text'>{{ paper.memo|linebreaksbr }}</p>
+        {% endif %}
+        <div class="card-footer">
+          <form method="post" action="{% url 'paper:delete' paper.id %}">{% csrf_token %}
+            <a class="btn btn-sm btn-success" href="{% url 'paper:detail' paper.id %}">詳細</a>
+            <a class="btn btn-sm btn-primary" href="{% url 'paper:update' paper.id %}?next={{ request.get_full_path }}">修正</a>
+            <button class="btn btn-sm btn-danger" type="submit" onclick='return confirm("本当に削除しますか？");'>削除</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  {% endfor %}
+{% endblock %}
+

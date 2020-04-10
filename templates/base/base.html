@@ -39,9 +39,21 @@
         {% block content %}
         {% endblock %}
       </div>
-      <div class="container my-4">
+      <div class="container my-4 d-block d-md-none">
         {% block content2 %}
         {% endblock %}
+      </div>
+      <div class="container my-4 d-md-block d-none">
+        <div class="row">
+          <div class="col-6">
+            {% block content-left %}
+            {% endblock %}
+          </div>
+          <div class="col-6">
+            {% block content-right %}
+            {% endblock %}
+          </div>
+        </div> 
       </div>
       <div class="container my-3">
         {% block content3 %}
