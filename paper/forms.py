@@ -11,7 +11,7 @@ class PaperForm(ModelForm):
     # when = forms.DateField(input_formats = '%m/%d/%Y')
     class Meta:
         model = Paper
-        fields = ['title','field','author','conference','year']
+        fields = ['title','field','author','conference','year','memo']
         widgets = {
             'deadline': DateInput(),
             }
