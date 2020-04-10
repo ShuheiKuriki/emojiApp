@@ -2,113 +2,29 @@
 {% block title %}論文リスト{% endblock %}
 {% block active3 %}active{% endblock %}
 {% block content %}
-<a class='btn btn-warning float-left' href="{% url 'paper:create' %}">論文追加</a>
-<form class='mt-4' method="POST" action="{% url 'paper:sort' %}">
-  {% csrf_token %}
-  {% for field in form %}
-    <span class='m-3'>{{ field.label_tag }} {{ field }}</span>
-  {% endfor %}
-  <button class="btn-sm btn-primary" type="submit">並び替え</button>
-</form>
+  <form class='mt-4' method="POST" action="{% url 'paper:sort' %}">
+    <a class='btn btn-warning float-right' href="{% url 'paper:create' %}">論文追加</a>
+    {% csrf_token %}
+    {% for field in form %}
+      <span class='m-3'>{{ field.label_tag }} {{ field }}</span>
+    {% endfor %}
+    <button class="btn-sm btn-primary" type="submit">並び替え</button>
+  </form>
 {% endblock %}
 {% block content2 %}
-<!-- md -->
-    <table class='table table-striped d-none d-md-block text-center'>
-      <thead>
-        <tr class='table-primary'>
-          <th scope='col'></th>
-          <th class="w-25" scope='col'>タイトル<span class='text-danger'></span></th>
-          <th class="w-25" scope='col'>分野</th>
-          <th scope='col'>著者</th>
-          <th class="" scope='col'>会議名</th>
-          <th class="" scope='col'>年</th>
-          <th scope='col'>期限</th>
-          <th scope='col'></th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for paper in paper_list %}
-          <tr>
-            <th scope='row'>{{ forloop.counter }}</th>
-            <td>{{ paper.title }}</td>
-            <td>{% if paper.field is not None %}{{ paper.field }}{% endif %}</td>
-            <td>{% if paper.author is not None %}{{ paper.author }}{% endif %}　　</td>
-            <td>{% if paper.conference is not None %}{{ paper.conference }}{% endif %}</td>
-            <td>{{ paper.year }}</td>
-            <td>{% if paper.deadline is not None %}{{ paper.deadline.month }}/{{ paper.deadline.day }}{% endif %}</td>
-            <td>
-              <div class="d-none d-md-block dropdown">
-                <button type="button" class="btn-xs btn-info dropdown-toggle" data-toggle="dropdown"><span class="caret"></span>menu</button>
-                <ul class="dropdown-menu" role="menu">
-                  <li><a class='btn btn-primary btn-block' href="{% url 'paper:detail' paper.id %}">詳細</a></li>
-                  <li><a class='btn btn-primary btn-block my-1' href="{% url 'paper:update' paper.id %}">編集</a></li>
-                  <li>
-                    <form method="post" action="{% url 'paper:delete' paper.id %}">{% csrf_token %}
-                      <button class="btn btn-primary btn-block" type="submit" onclick='return confirm("本当に削除しますか？");'>削除</button>
-                    </form>
-                  </li>
-                </ul>
-              </div>
-            </td>
-          </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-    <!-- xs,sm -->
-      {% for paper in paper_list %}
-        <table class='table table-sm table-striped table-bordered table-responsive d-block d-md-none'>
-          <thead>
-          </thead>
-          <tbody>
-              <tr class='table-primary'>
-                <th scope='row'>{{ forloop.counter }}</th>
-                <th class="w-50" scope='col'>タイトル<span class='text-danger'></span></th>
-                <th class="w-50" scope='col'>{{ paper.title }}</th>
-              </tr>
-              <tr>
-                <th scope='row'></th>
-                <td scope='col'>ジャンル</td>
-                <td>{{ paper.field }}</td>
-              </tr>
-              <tr>
-                <th scope='row'></th>
-                <td scope='col'>著者</td>
-                <td scope='col'>{{ paper.author }}</td>
-              </tr>
-              <tr>
-                <th scope='row'></th>
-                <td scope='col'>会議名</td>
-                <td scope='col'>{{ paper.conference }}</td>
-              </tr>
-              <tr>
-                <th scope='row'></th>
-                <td scope='col'>年</td>
-                <td scope='col'>{{ paper.next }}</td>
-              </tr>
-              <tr>
-                <th scope='row'></th>
-                <td scope='col'>期限</td>
-                <td scope='col'>{{ paper.deadline.month }}/{{ paper.deadline.day }}</td>
-              </tr>
-              <tr>
-                <th scope='row'></th>
-                <td scope='col'>メニュー</td>
-                <td scope='col'>
-                  <div class="d-block d-md-none dropdown">
-                    <button type="button" class="btn-xs btn-info dropdown-toggle" data-toggle="dropdown"><span class="caret"></span>menu</button>
-                    <ul class="dropdown-menu" role="menu">
-                      <li><a class='btn btn-primary btn-block' href="{% url 'paper:detail' paper.id %}">詳細</a></li>
-                      <li><a class='btn btn-primary btn-block my-1' href="{% url 'paper:update' paper.id %}?next={{ request.get_full_path }}">編集</a></li>
-                      <li>
-                        <form method="post" action="{% url 'paper:delete' paper.id %}?next={{ request.get_full_path }}">{% csrf_token %}
-                          <button class="btn btn-primary btn-block" type="submit" onclick='return confirm("本当に削除しますか？");'>削除</button>
-                        </form>
-                      </li>
-                    </ul>
-                  </div>
-                </td>
-              </tr>
-          </tbody>
-        </table>
-      {% endfor %}
+  {% for paper in paper_list %}
+    <div class="card card-default">
+      <div class="card-body">
+        ○タイトル : 「{{ paper.title|linebreaksbr }}」<br><br>
+        ○感想 : {% if paper.memo is not None %}{{ paper.memo|linebreaksbr }}{% endif %}<br><br>
+        <div class="card-footer">
+          <form method="post" action="{% url 'paper:delete' paper.id %}">{% csrf_token %}
+            <a class="btn btn-success" href="{% url 'paper:detail' paper.id %}">詳細</a>
+            <a class="btn btn-primary" href="{% url 'paper:update' paper.id %}?next={{ request.get_full_path }}">修正</a>
+            <button class="btn btn-danger" type="submit" onclick='return confirm("本当に削除しますか？");'>削除</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
 {% endblock %}

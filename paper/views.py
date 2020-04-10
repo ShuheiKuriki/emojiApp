@@ -18,7 +18,7 @@ from datetime import date
 # Create your views here.
 
 def index(request):
-    return redirect('paper:list', sort='deadline')
+    return redirect('paper:list', sort='-edit_date')
 
 class PaperListView(ListView):
     model = Paper

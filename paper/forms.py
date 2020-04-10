@@ -11,11 +11,11 @@ class PaperForm(ModelForm):
     # when = forms.DateField(input_formats = '%m/%d/%Y')
     class Meta:
         model = Paper
-        fields = ['title','field','author','conference','year','deadline']
+        fields = ['title','field','author','conference','year']
         widgets = {
             'deadline': DateInput(),
             }
 
 class SortForm(forms.Form):
-    keys = [('deadline','期限'),("field",'分野'),("year",'年'),("conference",'会議')]
+    keys = [("field",'分野'),("year",'年'),("conference",'会議'),("edit_date",'最終編集日')]
     key = forms.ChoiceField(choices=keys,required=True)

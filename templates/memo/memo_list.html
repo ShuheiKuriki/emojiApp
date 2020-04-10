@@ -2,74 +2,21 @@
 {% block title %}メモリスト{% endblock %}
 {% block active4 %}active{% endblock %}
 {% block content %}
-  <h1>研究方針メモ<a class='btn btn-warning float-right' href="{% url 'memo:create' %}">メモ追加</a></h1>
+  <h3>研究方針メモ<a class='btn btn-warning float-right' href="{% url 'memo:create' %}">メモ追加</a></h3>
 {% endblock %}
 {% block content2 %}
-<!-- md -->
-    <table class='table table-striped d-none d-md-block text-center'>
-      <thead class='thead-dark'>
-        <tr>
-          <th class="" scope='col'>日付</th>
-          <th class="w-75" scope='col'>メモ</th>
-          <th class="" scope='col'></th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for memo in memo_list %}
-          <tr>
-            <td>{{ memo.date.month }}/{{ memo.date.day }}</td>
-            <td>{{memo.memo}}</td>
-            <td>
-              <div class="d-none d-md-block dropdown">
-                <button type="button" class="btn-xs btn-info dropdown-toggle" data-toggle="dropdown"><span class="caret"></span>menu</button>
-                <ul class="dropdown-menu" role="menu">
-                  <li><a class='btn btn-primary btn-block' href="{% url 'memo:detail' memo.id %}">詳細</a></li>
-                  <li><a class='btn btn-primary btn-block my-1' href="{% url 'memo:update' memo.id %}">編集</a></li>
-                  <li>
-                    <form method="post" action="{% url 'memo:delete' memo.id %}">{% csrf_token %}
-                      <button class="btn btn-primary btn-block" type="submit" onclick='return confirm("本当に削除しますか？");'>削除</button>
-                    </form>
-                  </li>
-                </ul>
-              </div>
-            </td>
-          </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-    <!-- xs,sm -->
-        <table class='table table-sm table-striped table-bordered table-responsive d-block d-md-none'>
-          <thead>
-          </thead>
-          <tbody>
-            {% for memo in memo_list %}
-              <tr class='table-primary'>
-                <th class="w-50" scope='col'>日付</th>
-                <th class="w-50" scope='col'>{{ memo.date.month }}/{{ memo.date.day }}</th>
-              </tr>
-              <tr>
-                <td scope='col'>メモ</td>
-                <td>{{ memo.memo }}</td>
-              </tr>
-              <tr>
-                <th scope='row'></th>
-                <td scope='col'>メニュー</td>
-                <td scope='col'>
-                  <div class="d-block d-md-none dropdown">
-                    <button type="button" class="btn-xs btn-info dropdown-toggle" data-toggle="dropdown"><span class="caret"></span>menu</button>
-                    <ul class="dropdown-menu" role="menu">
-                      <li><a class='btn btn-primary btn-block' href="{% url 'memo:detail' memo.id %}">詳細</a></li>
-                      <li><a class='btn btn-primary btn-block my-1' href="{% url 'memo:update' memo.id %}">編集</a></li>
-                      <li>
-                        <form method="post" action="{% url 'memo:delete' memo.id %}">{% csrf_token %}
-                          <button class="btn btn-primary btn-block" type="submit" onclick='return confirm("本当に削除しますか？");'>削除</button>
-                        </form>
-                      </li>
-                    </ul>
-                  </div>
-                </td>
-              </tr>
-            {% endfor %}
-          </tbody>
-        </table>
+  {% for memo in memo_list %}
+    <div class="card card-default">
+      <div class="card-body">
+        {{ memo.date.month }}/{{ memo.date.day }}<br>
+        {{ memo.memo|linebreaksbr }}<br><br>
+        <div class="card-footer">
+          <form method="post" action="{% url 'memo:delete' memo.id %}">{% csrf_token %}
+            <a class="btn btn-primary" href="{% url 'memo:update' memo.id %}?next={{ request.get_full_path }}">修正</a>
+            <button class="btn btn-danger" type="submit" onclick='return confirm("本当に削除しますか？");'>削除</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
 {% endblock %}
