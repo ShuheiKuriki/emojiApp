@@ -19,11 +19,11 @@
       </div>
     </div>
   {% endfor %}
-  {% for memos in memo2 %}
-    <div class="row">
-      {% for memo in memos %}
-        <div class="col-6 my-2 d-none d-md-block">
-          <div class="card card-default">
+  <div class="row">
+    {% for memos in memo2 %}
+      <div class="col-6 my-2 d-none d-md-block">
+        {% for memo in memos %}
+          <div class="card card-default my-2">
             <div class="card-body">
               <h5 class='card-title'>{{ memo.date.month }}/{{ memo.date.day }}</h5>
               <p class='card-text'>{{ memo.memo|linebreaksbr }}</p>
@@ -35,8 +35,8 @@
               </div>
             </div>
           </div>
-        </div>
-      {% endfor %}
-    </div>
-  {% endfor %}
+        {% endfor %}
+      </div>
+    {% endfor %}
+  </div>
 {% endblock %}

@@ -17,5 +17,5 @@ class PaperForm(ModelForm):
             }
 
 class SortForm(forms.Form):
-    keys = [("field",'分野'),("year",'年'),("conference",'会議'),("edit_date",'最終編集日')]
+    keys = [("field",'分野'),("-year",'年'),("conference",'会議'),("-edit_date",'最終編集日')]
     key = forms.ChoiceField(choices=keys,required=True)
