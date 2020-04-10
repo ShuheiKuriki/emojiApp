@@ -23,6 +23,18 @@ class MemoListView(ListView):
     def get_queryset(self):
         return Memo.objects.all().order_by('-date')
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)  #テンプレートに渡すコンテキストに 「user_count」 という変数を追加
+        memo_list = context['memo_list']
+        memo2 = []
+        n = len(memo_list)
+        for i in range(int(n/2)):
+            memo2.append([memo_list[2*i], memo_list[2*i+1]])
+        if n%2 == 1:
+            memo2.append([memo_list[n-1]])
+        context['memo2'] = memo2
+        return context
+
 class MemoCreateView(CreateView):
     form_class = MemoForm
     template_name = 'memo/memo_create.html'
@@ -40,15 +52,6 @@ def delete(request,pk):
     memo = get_object_or_404(Memo, pk=pk)
     memo.delete()
     return redirect('memo:index')
-
-class MemoDetailView(DetailView):
-    model = Memo
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['info'] = {"date":context["object"].date, "memo":context["object"].memo}
-        return context
-
 
 def redirect_to_origin(request):
     redirect_to = request.GET.get('next')

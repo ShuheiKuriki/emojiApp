@@ -29,9 +29,16 @@ class PaperListView(ListView):
         return papers
 
     def get_context_data(self, **kwargs):
-            context = super().get_context_data(**kwargs)  #テンプレートに渡すコンテキストに 「user_count」 という変数を追加
-            context['form'] = SortForm
-            return context
+        context = super().get_context_data(**kwargs)  #テンプレートに渡すコンテキストに 「user_count」 という変数を追加
+        context['form'] = SortForm
+        paper2 = []
+        n = len(context['paper_list'])
+        for i in range(int(n/2)):
+            paper2.append([context['paper_list'][2*i], context['paper_list'][2*i+1]])
+        if n%2 == 1:
+            paper2.append([context['paper_list'][n-1]])
+        context['paper2'] = paper2
+        return context
 
 def sort(request):
     if request.method == "POST":

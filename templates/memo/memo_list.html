@@ -6,53 +6,37 @@
 {% endblock %}
 {% block content2 %}
   {% for memo in memo_list %}
-    <div class="card card-default">
+    <div class="card card-default my-2 d-block d-md-none">
       <div class="card-body">
         <h5 class='card-title'>{{ memo.date.month }}/{{ memo.date.day }}</h5>
         <p class='card-text'>{{ memo.memo|linebreaksbr }}</p>
         <div class="card-footer">
           <form method="post" action="{% url 'memo:delete' memo.id %}">{% csrf_token %}
-            <a class="btn btn-primary" href="{% url 'memo:update' memo.id %}?next={{ request.get_full_path }}">修正</a>
-            <button class="btn btn-danger" type="submit" onclick='return confirm("本当に削除しますか？");'>削除</button>
+            <a class="btn btn-sm btn-primary" href="{% url 'memo:update' memo.id %}?next={{ request.get_full_path }}">修正</a>
+            <button class="btn btn-sm btn-danger" type="submit" onclick='return confirm("本当に削除しますか？");'>削除</button>
           </form>
         </div>
       </div>
     </div>
   {% endfor %}
-{% endblock %}
-{% block content-left %}
-  {% for memo in memo_list %}
-    {% if forloop.counter|divisibleby:2 == 0 %}
-    <div class="card card-default">
-      <div class="card-body">
-        <h5 class='card-title'>{{ memo.date.month }}/{{ memo.date.day }}</h5>
-        <p class='card-text'>{{ memo.memo|linebreaksbr }}</p>
-        <div class="card-footer">
-          <form method="post" action="{% url 'memo:delete' memo.id %}">{% csrf_token %}
-            <a class="btn btn-primary" href="{% url 'memo:update' memo.id %}?next={{ request.get_full_path }}">修正</a>
-            <button class="btn btn-danger" type="submit" onclick='return confirm("本当に削除しますか？");'>削除</button>
-          </form>
+  {% for memos in memo2 %}
+    <div class="row">
+      {% for memo in memos %}
+        <div class="col-6 my-2 d-none d-md-block">
+          <div class="card card-default">
+            <div class="card-body">
+              <h5 class='card-title'>{{ memo.date.month }}/{{ memo.date.day }}</h5>
+              <p class='card-text'>{{ memo.memo|linebreaksbr }}</p>
+              <div class="card-footer">
+                <form method="post" action="{% url 'memo:delete' memo.id %}">{% csrf_token %}
+                  <a class="btn btn-primary" href="{% url 'memo:update' memo.id %}?next={{ request.get_full_path }}">修正</a>
+                  <button class="btn btn-danger" type="submit" onclick='return confirm("本当に削除しますか？");'>削除</button>
+                </form>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
+      {% endfor %}
     </div>
-    {% endif %}
-  {% endfor %}
-{% endblock %}
-{% block content-right %}
-  {% for memo in memo_list %}
-    {% if forloop.counter|divisibleby:2 == 1 %}
-    <div class="card card-default">
-      <div class="card-body">
-        <h5 class='card-title'>{{ memo.date.month }}/{{ memo.date.day }}</h5>
-        <p class='card-text'>{{ memo.memo|linebreaksbr }}</p>
-        <div class="card-footer">
-          <form method="post" action="{% url 'memo:delete' memo.id %}">{% csrf_token %}
-            <a class="btn btn-primary" href="{% url 'memo:update' memo.id %}?next={{ request.get_full_path }}">修正</a>
-            <button class="btn btn-danger" type="submit" onclick='return confirm("本当に削除しますか？");'>削除</button>
-          </form>
-        </div>
-      </div>
-    </div>
-    {% endif %}
   {% endfor %}
 {% endblock %}
