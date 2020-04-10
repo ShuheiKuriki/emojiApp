@@ -8,7 +8,7 @@
   {% for memo in memo_list %}
     <div class="card card-default">
       <div class="card-body">
-        {{ memo.date.month }}/{{ memo.date.day }}<br>
+        {{ memo.date.month }}/{{ memo.date.day }}<br><br>
         {{ memo.memo|linebreaksbr }}<br><br>
         <div class="card-footer">
           <form method="post" action="{% url 'memo:delete' memo.id %}">{% csrf_token %}
