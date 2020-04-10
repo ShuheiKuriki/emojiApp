@@ -16,7 +16,7 @@
     <div class="card card-default">
       <div class="card-body">
         ○タイトル : 「{{ paper.title|linebreaksbr }}」<br><br>
-        ○感想 : {% if paper.memo is not None %}{{ paper.memo|linebreaksbr }}{% endif %}<br><br>
+        {% if paper.memo is not None %}○感想<br>{{ paper.memo|linebreaksbr }}{% endif %}
         <div class="card-footer">
           <form method="post" action="{% url 'paper:delete' paper.id %}">{% csrf_token %}
             <a class="btn btn-success" href="{% url 'paper:detail' paper.id %}">詳細</a>
