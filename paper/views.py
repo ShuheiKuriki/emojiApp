@@ -41,12 +41,10 @@ class PaperListView(ListView):
         context['paper2'] = [col1,col2]
         return context
 
+@require_POST
 def sort(request):
-    if request.method == "POST":
-        s = request.POST.get('key')
-        return redirect('paper:list', sort=s)
-    else:
-        return redirect('paper:list', sort='deadline')
+    s = request.POST.get('key')
+    return redirect('paper:list', sort=s)
 
 class PaperCreateView(CreateView):
     form_class = PaperForm
@@ -56,6 +54,10 @@ class PaperCreateView(CreateView):
 class PaperUpdateView(UpdateView):
     model = Paper
     form_class = PaperForm
+
+    def form_valid(self, form):
+        form.instance.edit_date = date.today()
+        return super(PaperUpdateView, self).form_valid(form)
 
     def get_success_url(self):
         return reverse_lazy('paper:index')
