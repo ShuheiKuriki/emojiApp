@@ -9,6 +9,7 @@ class Paper(models.Model):
     field = models.CharField('分野', choices=fields, default ='研究',max_length=32)
     author = models.CharField('著者', max_length=32, blank=True, null=True)
     conference = models.CharField('会議名', max_length=32, blank=True, null=True)
+    url = models.CharField('URL', max_length=128, blank=True, null=True)
     year = models.IntegerField('年', default=2020)
     memo = models.TextField('感想', blank=True, null=True)
 

@@ -71,17 +71,6 @@ def delete(request,pk):
 class PaperDetailView(DetailView):
     model = Paper
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        meta_fields = Paper._meta.get_fields()
-        dic = {}
-        for field in meta_fields:
-            if field.name != 'id':
-                exec('dic[field.verbose_name]=context["object"].{}'.format(field.name))
-        context['info'] = dic
-        return context
-
-
 def redirect_to_origin(request):
     redirect_to = request.GET.get('next')
     url_is_safe = is_safe_url(
