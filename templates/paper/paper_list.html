@@ -16,7 +16,11 @@
     <div class="card card-default my-2 d-block d-md-none">
       <div class="card-body">
         <h5 class='card-title'>○タイトル</h5>
-        <p class='card-text'>{{ paper.title|linebreaksbr }}</p>
+        {% if paper.url is not None %}
+          <p class='card-text'><a href={{paper.url}}>{{ paper.title|linebreaksbr }}</a></p>
+        {% else %}
+          <p class='card-text'>{{ paper.title|linebreaksbr }}</p>
+        {% endif %}
         {% if paper.memo is not None %}
           <h5 class='card-title'>○感想</h5>
           <p class='card-text'>{{ paper.memo|linebreaksbr }}</p>
@@ -38,7 +42,11 @@
           <div class="card card-default my-2">
             <div class="card-body">
               <h5 class='card-title'>○タイトル</h5>
-              <p class='card-text'>{{ paper.title|linebreaksbr }}</p>
+              {% if paper.url is not None %}
+                <p class='card-text'><a href={{paper.url}}>{{ paper.title|linebreaksbr }}</a></p>
+              {% else %}
+                <p class='card-text'>{{ paper.title|linebreaksbr }}</p>
+              {% endif %}
               {% if paper.memo is not None %}
                 <h5 class='card-title'>○感想</h5>
                 <p class='card-text'>{{ paper.memo|linebreaksbr }}</p>

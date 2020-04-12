@@ -6,9 +6,9 @@
   <div class="card card-default">
     <div class="card-body">
       {% if paper.url is not None %}
-        <p class='card-text'>○タイトル :　<a href={{paper.url}}>{% if paper.title is not None %}{{ paper.title }}{% endif %}</a></p>
+        <p class='card-text'>○タイトル :　<a href={{paper.url}}>{{ paper.title }}</a></p>
       {% else %}
-        {% if paper.title is not None %}<p class='card-text'>○タイトル :　{{ paper.title }}</p>{% endif %}
+        <p class='card-text'>○タイトル :　{{ paper.title }}</p>
       {% endif %}
       
       {% if paper.field is not None %}<p class='card-text'>○分野　 　:　{{ paper.field }}</p>{% endif %}
