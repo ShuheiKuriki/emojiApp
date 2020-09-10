@@ -1,33 +1,15 @@
 {% extends "base/base.html" %}
 {% block title %}絵文字翻訳結果ページ{% endblock %}
+{% block active1 %}active{% endblock %}
 {% block content %}
-  <h2>入力言語 : {{lang.src}}</h2>
-  <p>{{source}}</p>
+  <h3>{{source}}</h3>
+  <h3>入力言語 : {{lang.src}}　出力言語 : {{lang.tgt}}</h3>
 {% endblock %}
 {% block content2 %}
-  <h2>出力言語 : {{lang.tgt}}</h2>
-
-  <div class='container'>
-    <div class='row'>
-      <div class='col-4'>
-        <h2>MUSE Supervised</h2>
-          {% for result in targets.sup %}
-            {{ result }}<br>
-          {% endfor %}
-      </div>
-      <div class='col-4'>
-        <h2>MUSE Unsupervised</h2>
-        {% for result in targets.unsup %}
-          {{ result }}<br>
-        {% endfor %}
-      </div>
-      <div class='col-4'>
-        <h2>Joint Align</h2>
-        {% for result in targets.joint %}
-          {{ result }}<br>
-        {% endfor %}
-      </div>
-    </div>
+  <div>
+    {% for result in targets.unsup %}
+      {{ result }}<br>
+    {% endfor %}
   </div>
 {% endblock %}
 {% block content3 %}
