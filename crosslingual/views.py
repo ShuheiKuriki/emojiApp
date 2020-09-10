@@ -87,6 +87,8 @@ def make_table(request):
       if src_lang == tgt_lang:
         continue
       folder = 'pickle_emb/{}-{}-unsup/'.format(src_lang, tgt_lang)
+      if not os.path.exists(folder):
+        folder = 'pickle_emb5000/{}-{}-unsup/'.format(src_lang, tgt_lang)
       with open(folder+"src_id2word", 'rb') as f:
         src_id2word = pickle.load(f)
       for i in range(100):
