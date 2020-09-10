@@ -7,12 +7,26 @@ class Translate(models.Model):
     target_unsup = ArrayField(models.CharField(max_length=32),size=5, max_length=(32 * 5), null=True)
     target_joint = ArrayField(models.CharField(max_length=32),size=5, max_length=(32 * 5), null=True)
     # id = models.AutoField(primary_key=True)
-    src_tgt_lang = models.CharField('言語対',
-                    choices=[('en-es',"英語→スペイン語"),('es-en', "スペイン語→英語"),
-                             ('en-ja', "英語→日本語"),('ja-en', "日本語→英語"),
-                             ('en-it', "英語→イタリア語"),('it-en', "イタリア語→英語"),
-                             ('it-es',"イタリア語→スペイン語"),('es-it', "スペイン語→イタリア語")],
-                    default ='en-es', max_length=256)
+    src_lang = models.CharField('入力言語', 
+      choices=[('en',"英語"),('es', "スペイン語"),('fr', "フランス語"),('it', "イタリア語")],
+      default ='en', max_length=256
+    )
+    tgt_lang = models.CharField('出力言語', 
+      choices=[('en',"英語"),('es', "スペイン語"),('fr', "フランス語"),('it', "イタリア語")],
+      default ='es', max_length=256
+    )
+
+class FrequentTable(models.Model):
+    source = models.CharField('元の単語', max_length=16)
+    words = ArrayField(models.CharField(max_length=32), size=10, max_length=(32 * 10), null=True)
+    dists = ArrayField(models.CharField(max_length=32), size=10, max_length=(32 * 10), null=True)
+    num = models.IntegerField(default=0, null=False)
+    src_lang = models.CharField('入力言語',
+      choices=[('en',"英語"),('es', "スペイン語"),('it', "イタリア語"),('fr', "フランス語")],
+      default ='en', max_length=256)
+    tgt_lang = models.CharField('出力言語',
+      choices=[('en',"英語"),('es', "スペイン語"),('it', "イタリア語"),('fr', "フランス語")],
+      default ='es', max_length=256)
 
 
 # class Done(models.Model):

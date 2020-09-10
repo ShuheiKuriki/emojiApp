@@ -1,0 +1,67 @@
+{% extends "base/base.html" %}
+{% block title %}高頻度単語リスト{% endblock %}
+{% block active1 %}active{% endblock %}
+{% block content %}
+<form class='mt-4' method="POST" action="{% url 'crosslingual:transition' %}">
+  {% csrf_token %}
+  {% for field in form %}
+    <span class='mr-3'>{{ field.label_tag }} {{ field }}</span>
+  {% endfor %}
+  <button class="btn-sm btn-primary" type="submit">言語切り替え</button>
+</form>
+
+{% endblock %}
+{% block content2 %}
+<!-- md -->
+  <h4>入力 : {{src}}　出力 : {{tgt}}</h4>
+  <table class='table-sm table-striped text-center' style="table-layout:fixed;width:100%;">
+    <colgroup>
+      <col>
+      <col style="width:10%;">
+      <col style="width:10%;">
+      <col style="width:10%;">
+      <col style="width:10%;">
+      <col style="width:10%;">
+      <col style="width:10%;">
+      <col style="width:10%;">
+      <col style="width:10%;">
+      <col style="width:10%;">
+      <col style="width:10%;">
+      <col style="width:10%;">
+    </colgroup>
+    <thead>
+      <tr class='table-primary'>
+        <th></th>
+        <th>入力単語</th>
+        <th>出力1</th>
+        <th>出力2</th>
+        <th>出力3</th>
+        <th>出力4</th>
+        <th>出力5</th>
+        <th>出力6</th>
+        <th>出力7</th>
+        <th>出力8</th>
+        <th>出力9</th>
+        <th>出力10</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for tgt in ftable %}
+        <tr>
+          <th scope='row'>{{ forloop.counter }}</th>
+          <td>{{ tgt.source }}</td>
+          {% for word in tgt.words %}
+            <td style="word-wrap:break-word;">{{ word }}</td>
+          {% endfor %}
+        </tr>
+        <tr>
+          <th scope='row'></th>
+          <td></td>
+          {% for dist in tgt.dists %}
+            <td style="font-size : 12px;"　class='text-secondary'>{{ dist }}</td>
+          {% endfor %}
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
