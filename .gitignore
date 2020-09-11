@@ -71,6 +71,7 @@ out/
 
 # large binaries
 emojiTransApp/data/word2vec
+joint_align/
 
 # generated embeddings
 generated_embeddings.p
