@@ -6,6 +6,7 @@ from .forms import TranslateForm, LangForm
 from .models import Translate, FrequentTable
 import os, pickle
 
+langs = {"en":"英語", "es":"スペイン語", "it":"イタリア語", "fr":"フランス語"}
 # Create your views here.
 def index(request):
   return render(request, 'crosslingual/cross_top.html')
@@ -55,7 +56,7 @@ def result(request):
       # src_tgt_lang=src_tgt_lang
     # )
     # print("OK9")
-    return render(request, 'crosslingual/cross_result.html', {"source":src_word, "lang": {'src':src_lang,'tgt':tgt_lang}, "targets": {"unsup":tgt_unsup_words}})
+    return render(request, 'crosslingual/cross_result.html', {"source":src_word, "lang": {'src':langs[src_lang],'tgt':langs[tgt_lang]}, "targets": {"unsup":tgt_unsup_words}})
   else:
     return render(request, 'error.html')
 
@@ -66,44 +67,43 @@ def translate_list(request):
 def frequent_table(request,src,tgt):
   ftable = FrequentTable.objects.filter(src_lang=src, tgt_lang=tgt).order_by('num')
   form = LangForm
-  langs = {"en":"英語", "es":"スペイン語", "it":"イタリア語", "fr":"フランス語"}
   return render(request, 'crosslingual/frequent_table.html', {'ftable':ftable, 'form':form, 'src':langs[src], 'tgt':langs[tgt]})
 
 def transition(request):
-    if request.method == "POST":
-        s = request.POST.get('src_lang')
-        t = request.POST.get('tgt_lang')
-        return redirect('crosslingual:table',src=s,tgt=t)
-    else:
-        return redirect('crosslingual:table',src='en',tgt='es')
+  if request.method == "POST":
+    s = request.POST.get('src_lang')
+    t = request.POST.get('tgt_lang')
+    return redirect('crosslingual:table',src=s,tgt=t)
+  else:
+    return redirect('crosslingual:table',src='en',tgt='es')
 
 def visual(request):
   return render(request, 'visualize_form.html')
 
-def make_table(request):
-  langs = ['en', 'es', 'it', 'fr']
-  for src_lang in langs:
-    for tgt_lang in langs:
-      if src_lang == tgt_lang:
-        continue
-      folder = 'pickle_emb/{}-{}-unsup/'.format(src_lang, tgt_lang)
-      if not os.path.exists(folder):
-        folder = 'pickle_emb5000/{}-{}-unsup/'.format(src_lang, tgt_lang)
-      with open(folder+"src_id2word", 'rb') as f:
-        src_id2word = pickle.load(f)
-      for i in range(100):
-        ans = translate(src_lang, tgt_lang, src_id2word[i])
-        lis = [s.split(' - ') for s in ans]
-        dists = [0]*10
-        words = [0]*10
-        for j,s in enumerate(ans):
-          dists[j], words[j] = s.split(' - ')
-        FrequentTable.objects.create(
-          num = i,
-          source = src_id2word[i],
-          words = words,
-          dists = dists,
-          src_lang = src_lang,
-          tgt_lang = tgt_lang
-        )
-  return
+# def make_table(request):
+#   langs = ['en', 'es', 'it', 'fr']
+#   for src_lang in langs:
+#     for tgt_lang in langs:
+#       if src_lang == tgt_lang:
+#         continue
+#       folder = 'pickle_emb/{}-{}-unsup/'.format(src_lang, tgt_lang)
+#       if not os.path.exists(folder):
+#         folder = 'pickle_emb5000/{}-{}-unsup/'.format(src_lang, tgt_lang)
+#       with open(folder+"src_id2word", 'rb') as f:
+#         src_id2word = pickle.load(f)
+#       for i in range(100):
+#         ans = translate(src_lang, tgt_lang, src_id2word[i])
+#         lis = [s.split(' - ') for s in ans]
+#         dists = [0]*10
+#         words = [0]*10
+#         for j,s in enumerate(ans):
+#           dists[j], words[j] = s.split(' - ')
+#         FrequentTable.objects.create(
+#           num = i,
+#           source = src_id2word[i],
+#           words = words,
+#           dists = dists,
+#           src_lang = src_lang,
+#           tgt_lang = tgt_lang
+#         )
+#   return

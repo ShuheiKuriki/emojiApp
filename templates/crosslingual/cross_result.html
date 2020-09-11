@@ -3,7 +3,7 @@
 {% block active1 %}active{% endblock %}
 {% block content %}
   <h3>{{source}}</h3>
-  <h3>入力言語 : {{lang.src}}　出力言語 : {{lang.tgt}}</h3>
+  <h3>入力 : {{lang.src}}　出力 : {{lang.tgt}}</h3>
 {% endblock %}
 {% block content2 %}
   <div>
@@ -14,5 +14,4 @@
 {% endblock %}
 {% block content3 %}
   <a href="{% url 'crosslingual:form' %}">もう一度翻訳する</a><br>
-  <a href="{% url 'crosslingual:list' %}">結果一覧</a><br>
 {% endblock %}

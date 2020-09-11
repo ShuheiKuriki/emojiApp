@@ -9,7 +9,7 @@ def form(request):
     return render(request, 'emoji/sentence_form.html')
 
 def result(request):
-    import translate
+    import emoji_translate
     if request.POST.get('sentence'):
         sentence = request.POST.get('sentence')
         emojis = translate.phr_to_emojis(sentence)
