@@ -23,31 +23,32 @@ def result(request):
     src_word = request.POST.get('source')
     src_lang = request.POST.get('src_lang')
     tgt_lang = request.POST.get('tgt_lang')
+    folder = 'pickle_emb/{}-{}-unsup/'.format(src_lang, tgt_lang)
+    if not os.path.exists(folder):
+      folder = 'pickle_emb5000/{}-{}-unsup/'.format(src_lang, tgt_lang)
+    with open(folder+"src_word2id", 'rb') as f:
+      word2id = pickle.load(f)
+    if src_word not in word2id:
+      tgt_unsup_words = ["入力した単語はリストに存在しません"]
+      return render(request, 'crosslingual/cross_result.html', {"source":src_word, "lang": {'src':langs[src_lang],'tgt':langs[tgt_lang]}, "targets": {"unsup":tgt_unsup_words}})
     # src_sup_path = 'vectors/{}-{}-super/vectors-{}.txt'.format(src_lang, tgt_lang, src_lang)
     # tgt_sup_path = 'vectors/{}-{}-super/vectors-{}.txt'.format(src_lang, tgt_lang, tgt_lang)
     # src_unsup_path = 'vectors/{}-{}-unsup/vectors-{}.txt'.format(src_lang, tgt_lang, src_lang)
     # tgt_unsup_path = 'vectors/{}-{}-unsup/vectors-{}.txt'.format(src_lang, tgt_lang, tgt_lang)
     # src_joint_path = 'vectors/{}-{}-joint/{}_joint_embedding.90'.format(src_lang, tgt_lang, src_lang)
     # tgt_joint_path = 'vectors/{}-{}-joint/{}_joint_embedding.90'.format(src_lang, tgt_lang, tgt_lang)
-    # nmax = 250000
-    # print("OK1")
     # try:
     #   tgt_sup_words = [str(i) for i in translate(src_sup_path, tgt_sup_path, nmax, src_word)]
     # except:
     #   tgt_sup_words = ["" for i in range(5)]
-    # print("OK2")
     try:
       tgt_unsup_words = [str(i) for i in translate(src_lang, tgt_lang, src_word=src_word)]
     except:
       tgt_unsup_words = ["" for i in range(5)]
-    # print("OK3")
     # try:
     #   tgt_joint_words = [str(i) for i in translate(src_joint_path, tgt_joint_path, 250000, src_word)]
     # except:
-    #   print("OK6")
     #   tgt_joint_words = ["" for i in range(5)]
-      # print("OK7")
-    # print("OK8")
     # Translate.objects.create(
       # source=src_word,
       # target_sup=tgt_sup_words,
@@ -55,7 +56,6 @@ def result(request):
       # target_joint=tgt_joint_words,
       # src_tgt_lang=src_tgt_lang
     # )
-    # print("OK9")
     return render(request, 'crosslingual/cross_result.html', {"source":src_word, "lang": {'src':langs[src_lang],'tgt':langs[tgt_lang]}, "targets": {"unsup":tgt_unsup_words}})
   else:
     return render(request, 'error.html')

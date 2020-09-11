@@ -2,9 +2,10 @@
 {% block title %}絵文字フォーム{% endblock %}
 {% block active2 %}active{% endblock %}
 {% block content %}
-    <form method="POST" action="result">
-        {% csrf_token %}
-        <input placeholder="English Sentence" name="sentence" type="text"/>
-        <button type="submit">翻訳</button>
-    </form>
+  <form method="POST" action="result">
+    {% csrf_token %}
+    <input placeholder="English Sentence" name="sentence" type="text"/>
+    <button type="submit">翻訳</button>
+  </form>
+  <h5>*公開環境では翻訳できません</h5>
 {% endblock %}
