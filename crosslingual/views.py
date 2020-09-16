@@ -20,7 +20,7 @@ def result(request):
     return redirect(to='/form')
   form = TranslateForm(request.POST)
   if form.is_valid():
-    src_word = request.POST.get('source')
+    src_word = request.POST.get('source').lower()
     src_lang = request.POST.get('src_lang')
     tgt_lang = request.POST.get('tgt_lang')
     folder = 'pickle_emb/{}-{}-unsup/'.format(src_lang, tgt_lang)
