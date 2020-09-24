@@ -44,46 +44,61 @@ def translate(src_lang, tgt_lang, src_word):
     src_id2word = pickle.load(f)
   # src_embeddings, src_id2word, src_word2id = load_vec(src_path, nmax)
   print("b")
-  tgt_embeddings = np.load(folder+tgt_lang+'.npy')
-  with open(folder+"tgt_id2word", 'rb') as f:
-    tgt_id2word = pickle.load(f)
+  try:
+    tgt_embeddings = np.load(folder+tgt_lang+'.npy')
+    with open(folder+"tgt_id2word", 'rb') as f:
+      tgt_id2word = pickle.load(f)
+  except:
+    tgt_embeddings = src_embeddings
+    tgt_id2word = src_id2word
   # tgt_embeddings, tgt_id2word, tgt_word2id = load_vec(tgt_path, nmax)
   print("c")
-  return get_nn(src_word, src_embeddings, src_id2word, tgt_embeddings, tgt_id2word, K=10)
+  if src_lang != tgt_lang:
+    return get_nn(src_word, src_embeddings, src_id2word, tgt_embeddings, tgt_id2word, K=10)
+  else:
+    return get_nn(src_word, src_embeddings, src_id2word, tgt_embeddings, tgt_id2word, K=11)[1:]
 # printing nearest neighbors in the target space
 
-# def save(src, tgt, nmax):
-#   # src_sup_path = 'vectors/{}-{}-super/vectors-{}.txt'.format(src, tgt, src)
-#   # tgt_sup_path = 'vectors/{}-{}-super/vectors-{}.txt'.format(src, tgt, tgt)
-#   src_unsup_path = 'vectors/{}-{}-unsup/vectors-{}.txt'.format(src, tgt, src)
-#   tgt_unsup_path = 'vectors/{}-{}-unsup/vectors-{}.txt'.format(src, tgt, tgt)
-#   # src_joint_path = 'vectors/{}-{}-joint/{}_joint_embedding.90'.format(src, tgt, src)
-#   # tgt_joint_path = 'vectors/{}-{}-joint/{}_joint_embedding.90'.format(src, tgt, tgt)
-#   if not os.path.isdir('pickle_emb{}'.format(nmax)):
-#     os.mkdir('pickle_emb{}'.format(nmax))
-#   folder = 'pickle_emb{}/{}-{}-unsup/'.format(nmax, src, tgt)
+# def make_folder(folder):
 #   if not os.path.isdir(folder):
 #     os.mkdir(folder)
 
-#   emb, id2word, word2id = load_vec(src_unsup_path, nmax)
-#   np.save(folder+src, emb/np.linalg.norm(emb, 2, 1)[:, None])
-#   with open(folder+"src_id2word",'wb') as f:
-#     pickle.dump(id2word, f)
-#   with open(folder+"src_word2id",'wb') as f:
-#     pickle.dump(word2id, f)
-
-#   emb, id2word, word2id = load_vec(tgt_unsup_path, nmax)
-#   np.save(folder+tgt, emb/np.linalg.norm(emb, 2, 1)[:, None])
-#   with open(folder+"tgt_id2word",'wb') as f:
-#     pickle.dump(id2word, f)
-#   with open(folder+"tgt_word2id",'wb') as f:
-#     pickle.dump(word2id, f)
+# def save(lang, tgt, emb_path, output_path, nmax=250000):
+#   emb, id2word, word2id = load_vec(emb_path, nmax)
+#   np.save(output_path+lang, emb/np.linalg.norm(emb, 2, 1)[:, None])
+#   if not tgt:
+#     with open(output_path+"src_id2word",'wb') as f:
+#       pickle.dump(id2word, f)
+#     with open(output_path+"src_word2id",'wb') as f:
+#       pickle.dump(word2id, f)
+#   else:
+#     with open(output_path+"tgt_id2word",'wb') as f:
+#       pickle.dump(id2word, f)
+#     with open(output_path+"tgt_word2id",'wb') as f:
+#       pickle.dump(word2id, f)
 
 # if __name__=='__main__':
-#   for src in ['en','es','fr','it']:
-#     for tgt in ['en','es','fr','it']:
-#       if src==tgt:
-#         continue
-#       save(src, tgt, 5000)
+#   src = 'ja'
+#   tgt = 'en'
+#   nmax = 5000
+#   make_folder('pickle_emb{}'.format(nmax))
+
+#   folder = 'pickle_emb/{}-{}-unsup/'.format(src, tgt)
+#   folder2 = 'pickle_emb{}/{}-{}-unsup/'.format(nmax, src, tgt)
+#   make_folder(folder)
+#   make_folder(folder2)
+
+#   emb_path = 'vectors/wiki.{}.vec'.format(src)
+#   save(src, False, emb_path, folder)
+#   save(src, False, emb_path, folder2, nmax)
+
+#   emb_path = 'vectors/wiki.{}.vec'.format(tgt)
+#   save(tgt, True, emb_path, folder)
+#   save(tgt, True, emb_path, folder2, nmax)
+  # src_sup_path = 'vectors/{}-{}-super/vectors-{}.txt'.format(src, tgt, src)
+  # tgt_sup_path = 'vectors/{}-{}-super/vectors-{}.txt'.format(src, tgt, tgt)
+  # src_unsup_path = 'vectors/{}-{}-unsup/vectors-{}.txt'.format(src, tgt, src)
+  # tgt_unsup_path = 'vectors/{}-{}-unsup/vectors-{}.txt'.format(src, tgt, tgt)
+      
 
 

@@ -2,10 +2,18 @@
 {% block title %}自然言語フォーム{% endblock %}
 {% block active1 %}active{% endblock %}
 {% block content %}
+  <h3>Unsupervised MUSEによる単語翻訳</h3>
+  <h5>*公開環境では異言語単語翻訳の、上位5000単語に限定してお試しいただけます</h5>
     <form method="POST" action="result">
         {% csrf_token %}
-        {{ form.as_p }}
+        {{ form1.as_p }}
         <!-- <input placeholder="自然言語文" name="sentence" type="text"/> -->
-        <button type="submit">単語翻訳</button>
+        <button type="submit">異言語単語翻訳</button>
+    </form>
+    <form method="POST" action="similar_result">
+        {% csrf_token %}
+        {{ form2.as_p }}
+        <!-- <input placeholder="自然言語文" name="sentence" type="text"/> -->
+        <button type="submit">同言語類義語翻訳</button>
     </form>
 {% endblock %}
