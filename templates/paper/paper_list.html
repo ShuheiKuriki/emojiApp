@@ -22,7 +22,7 @@
           <p class='card-text'>{{ paper.title|linebreaksbr }}</p>
         {% endif %}
         {% if paper.year is not None %}
-          <h5 class='card-title'>○年・感想</h5>
+          <h5 class='card-title'>○年・学会</h5>
           <p class='card-text'>{{ paper.year }} {{ paper.conference|linebreaksbr }}</p>
         {% endif %}
         {% if paper.memo is not None %}
@@ -52,7 +52,7 @@
                 <p class='card-text'>{{ paper.title|linebreaksbr }}</p>
               {% endif %}
               {% if paper.year is not None %}
-                <h5 class='card-title'>○年・感想</h5>
+                <h5 class='card-title'>○年・学会</h5>
                 <p class='card-text'>{{ paper.year }} {{ paper.conference|linebreaksbr }}</p>
               {% endif %}
               {% if paper.memo is not None %}
