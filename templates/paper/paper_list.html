@@ -22,11 +22,11 @@
           <p class='card-text'>{{ paper.title|linebreaksbr }}</p>
         {% endif %}
         {% if paper.year is not None %}
-          <h5 class='card-title'>○年・学会</h5>
-          <p class='card-text'>{{ paper.year }} {{ paper.conference|linebreaksbr }}</p>
+          <h5 class='card-title'>○年・学会・著者</h5>
+          <p class='card-text'>{{ paper.year }} {{ paper.conference|linebreaksbr }} {{ paper.author }}</p>
         {% endif %}
         {% if paper.memo is not None %}
-          <h5 class='card-title'>○感想</h5>
+          <h5 class='card-title'>○内容・感想</h5>
           <p class='card-text'>{{ paper.memo|linebreaksbr }}</p>
         {% endif %}
         <div class="card-footer">
@@ -52,11 +52,11 @@
                 <p class='card-text'>{{ paper.title|linebreaksbr }}</p>
               {% endif %}
               {% if paper.year is not None %}
-                <h5 class='card-title'>○年・学会</h5>
-                <p class='card-text'>{{ paper.year }} {{ paper.conference|linebreaksbr }}</p>
+                <h5 class='card-title'>○年・学会・著者</h5>
+                <p class='card-text'>{{ paper.year }} {{ paper.conference|linebreaksbr }} {{ paper.author }}</p>
               {% endif %}
               {% if paper.memo is not None %}
-                <h5 class='card-title'>○感想</h5>
+                <h5 class='card-title'>○内容・感想</h5>
                 <p class='card-text'>{{ paper.memo|linebreaksbr }}</p>
               {% endif %}
               <div class="card-footer">
